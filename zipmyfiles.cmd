@@ -23,8 +23,10 @@ CLS
     SET "_FILEPATH=%*"
 
     IF /I NOT "%_ME%"=="%_FILEPATH%" (
-        ECHO "%_FILEPATH%.gz"
-        "%_7z%" a -mx5 -tgzip -sse -aoa -sdel "%_FILEPATH%.gz" "%_FILEPATH%"
+        IF /I NOT "%_FILEPATH:~-3%"=="zip" (
+            ECHO "%_FILEPATH%.gz"
+            "%_7z%" a -mx5 -tgzip -sse -aoa -sdel "%_FILEPATH%.gz" "%_FILEPATH%"
+        )
     )
 
     GOTO :EOF
